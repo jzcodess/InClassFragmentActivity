@@ -17,7 +17,7 @@ import kotlinx.coroutines.selects.select
 const val IMAGES_KEY = "imageList"
 
 class ImageDisplayFragment : Fragment() {
-=
+
     private val mainViewModel : MainViewModel by lazy{
         ViewModelProvider(requireActivity())[MainViewModel::class.java]
     }

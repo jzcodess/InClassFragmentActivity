@@ -2,6 +2,7 @@ package edu.temple.inclassactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
@@ -18,14 +19,16 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.setImageIds(imageArray)
 
-        val imageArray1 = ImageDisplayFragment.newInstance(imageArray)
-
         // Attach an instance of ImageDisplayFragment using factory method
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.imageFragmentContainer, imageArray1)
-            .commit()
+        if(supportFragmentManager.findFragmentById(R.id.imageFragmentContainer) !is ImageDisplayFragment)
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.imageFragmentContainer, ImageDisplayFragment())
+                .addToBackStack(null)
+                .commit()
     }
 
-    override fun imageSelected(itemId)
+    override fun imageSelected(itemId: Int){
+        Toast.makeText(this, "You selected $itemId", Toast.LENGTH_SHORT).show()
+    }
 }
