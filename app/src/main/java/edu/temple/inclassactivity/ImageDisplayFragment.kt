@@ -36,7 +36,7 @@ class ImageDisplayFragment : Fragment() {
 
             mainViewModel.getImageIds().observe(requireActivity()){
                 adapter = CustomRecyclerAdapter(it){
-                    (requireActivity() as ImageSelectedInterface).imageSelected()
+                    (requireActivity() as ImageSelectedInterface).imageSelected(it)
                 }
             }
 
