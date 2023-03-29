@@ -32,19 +32,16 @@ class ImageDisplayFragment : Fragment() {
 
         // The recycler view is the root element of the Fragment's layout
         // as such the view argument passed to onViewCreated() is the RecyclerView
-        with (view as RecyclerView) {
+        with(view as RecyclerView) {
 
-            mainViewModel.getImageIds().observe(requireActivity()){
-                adapter = CustomRecyclerAdapter(it){
-                    (requireActivity() as ImageSelectedInterface).imageSelected(it)
-                }
+            mainViewModel.getImageIds().observe(requireActivity()) {
+                adapter = CustomRecyclerAdapter(it, requireActivity() as ImageSelectedInterface)
             }
-
             layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }
+}
 
-    interface ImageSelectedInterface{
-        fun imageSelected(itemId: Int)
-    }
+interface ImageSelectedInterface{
+    fun imageSelected(itemId: Int)
 }

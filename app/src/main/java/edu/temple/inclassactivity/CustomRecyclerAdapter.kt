@@ -4,8 +4,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import edu.temple.inclassactivity.ImageSelectedInterface
 
-class CustomRecyclerAdapter(private val items: IntArray) : RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
+class CustomRecyclerAdapter(
+    private val items: IntArray,
+    private val imageSelectedInterface: ImageDisplayFragment.ImageSelectedInterface) : RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(val imageView: ImageView) : ViewHolder(imageView)
 
@@ -16,9 +19,12 @@ class CustomRecyclerAdapter(private val items: IntArray) : RecyclerView.Adapter<
             setPadding(20, 0, 20, 0)
         })
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int){
         holder.imageView.setImageResource(items[position])
+        holder.imageView.setOnClickListener{
+            imageSelectedInterface.imageSelected(items[position])
+        }
+    }
 
     override fun getItemCount() = items.size
-
 }
